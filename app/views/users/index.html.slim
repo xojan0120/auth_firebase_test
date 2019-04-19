@@ -1,0 +1,13 @@
+h1 登録アカウント情報
+
+table.table
+  thead
+    tr
+      th email
+      th uid
+
+  tbody
+    - @users.each do |user|
+      tr
+        td = user.email
+        td = user.uid

@@ -1,0 +1,34 @@
+doctype html
+html
+  head
+    title
+      | AuthFirebaseTest2
+    = csrf_meta_tags
+
+    // Firebase認証用
+    script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-app.js"
+    script src="https://www.gstatic.com/firebasejs/5.8.4/firebase-auth.js"
+
+    // FirebaseUI用
+    script src="https://www.gstatic.com/firebasejs/ui/3.5.2/firebase-ui-auth__ja.js"
+    link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/3.5.2/firebase-ui-auth.css"
+
+    // GoogleFonts
+    link href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c" rel="stylesheet"
+
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+
+    meta name="viewport" content="width=device-width, initial-scale=1"
+  body
+    .container
+      - flash.each do |message_type, message|
+        = content_tag(:div, message, class: "alert alert-#{message_type}")
+      - if logged_in?
+        .user-info
+          | ログインユーザ：#{current_user.email} 
+          span style="margin-left:1em"
+            = link_to 'ログアウト', '', onclick: 'firebaseLogout();return false;'
+          span style="margin-left:1em"
+            = link_to 'アカウント削除', '', onclick: 'firebaseUserDelete();return false;'
+      = yield
