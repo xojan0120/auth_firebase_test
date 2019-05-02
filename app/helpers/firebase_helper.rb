@@ -1,5 +1,6 @@
 require 'jwt'
 require 'yaml'
+require 'net/http'
 
 module FirebaseHelper
   CONFIG = YAML.load_file(Rails.root.join("config/firebase.yml"))
